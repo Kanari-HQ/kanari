@@ -37,6 +37,11 @@ app.get('/', routes.index);
 app.get('/about', routes.about);
 app.get('/users', user.list);
 
+var Admin = require('./controllers/Admin');
+
+
+
+
 pg.connect(dbUrl, function(err, db){
     if(err){
         console.log('Sorry, there is no postgres server running at the specified address.');
@@ -45,6 +50,13 @@ pg.connect(dbUrl, function(err, db){
             req.db = db;
             next();
         };
+
+
+        app.all('/admin*', attachDB, function(req, res, next){
+            Admin.run(req, res, next);
+        });
+
+
         http.createServer(app).listen(config.port, function(){
           console.log('Connected to database')
           console.log('Express server listening on port ' + config.port);
