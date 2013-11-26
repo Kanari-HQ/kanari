@@ -1,7 +1,7 @@
 var config = {
     local: {
         mode: 'local',
-        dbUrl: 'tcp://nathan@localhost:5432/kanari_development',
+        dbUrl: 'tcp://localhost:5432/kanari_development',
         port: 3000
     },
     staging: {
