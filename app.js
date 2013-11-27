@@ -26,14 +26,14 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-if ('development' == app.get('env')) {
+app.configure('development', function(){
     console.log('Using config db_url');
     dbUrl = config.dbUrl;
-
+    app.locals.pretty = true;
     app.use(express.errorHandler()); // @nate: why is this only in development???
-}
-else {
+});
+
+if ('development' != app.get('env')) {
     dbUrl = process.env.DATABASE_URL;
     if(dbUrl) {
         console.log('Using DATABASE_URL as expected');

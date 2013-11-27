@@ -1,7 +1,27 @@
 doctype 5
-html
+//[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7" lang="en"><![endif]
+//[if IE 7] <html class="ie lt-ie9 lt-ie8" lang="en"><![endif]
+//[if IE 8] <html class="ie lt-ie9" lang="en"><![endif]
+//[if IE 9 ]> <html lang="en" class="ie lt-ie10"><![endif]
+<!--[if (gt IE 9)|!(IE)]>
+html(lang="en")
+  <![endif]-->
+
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+
+    block javascript_placeholder
+
+    // @kamtodo: do we need to add csrf_meta_tags in here
+      <meta content="authenticity_token" name="csrf-param" />
+      <meta content="oONBG5tBv5ZVc1SEZfu406LE/xd7gkAadW/cDOfBzMA=" name="csrf-token" />
+
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+    <!--[if lt IE 9]>
+    script(type='text/javascript' src='/javascripts/manifests/ie_scripts.js')
+    <![endif]-->
+
   body
     block content
