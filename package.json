@@ -1,11 +1,13 @@
 {
   "name": "kanari",
+  "description": "User testing live events",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
+    "db-migrate": "*",
     "express": "3.4.4",
     "pg": "2.x",
     "jade": "*",

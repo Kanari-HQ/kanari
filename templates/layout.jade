@@ -1,7 +1,10 @@
 doctype 5
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+  include includes/head
+
   body
+    include includes/app-header
+    include includes/header
     block content
+    include includes/footer
+  include includes/foot

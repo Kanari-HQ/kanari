@@ -1,5 +1,7 @@
 var BaseController = require("./Base"),
     View = require("../views/Base");
+
+
 module.exports = BaseController.extend({
     name: "Admin",
     run: function(req, res, next) {
@@ -9,4 +11,5 @@ module.exports = BaseController.extend({
             content: 'Welcome to the control panel'
         });
     }
+
 });
