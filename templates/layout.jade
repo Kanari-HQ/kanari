@@ -1,4 +1,5 @@
 doctype 5
+<<<<<<< HEAD
 //[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7" lang="en"><![endif]
 //[if IE 7] <html class="ie lt-ie9 lt-ie8" lang="en"><![endif]
 //[if IE 8] <html class="ie lt-ie9" lang="en"><![endif]
@@ -22,6 +23,14 @@ html(lang="en")
     <!--[if lt IE 9]>
     script(type='text/javascript' src='/javascripts/manifests/ie_scripts.js')
     <![endif]-->
+=======
+html
+  include includes/head
+>>>>>>> ad2912e9f1c606e9fa9827c5b5f82abbf87ba31a
 
   body
+    include includes/app-header
+    include includes/header
     block content
+    include includes/footer
+  include includes/foot
