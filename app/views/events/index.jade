@@ -1,0 +1,31 @@
+extends ../layouts/default
+block main
+  h1= title
+block content
+  - if (events.length)
+    - each event in events
+      .event
+        h3
+          a(href='/events/'+event._id, title=event.title) #{event.title}
+        p= event.body
+        .meta.muted
+          span= formatDate(event.createdAt)
+          &nbsp; - &nbsp;
+          - if (event.user)
+            span Author &nbsp;
+            - var name = event.user.name ? event.user.name : event.user.username
+            a(href="/users/"+event.user._id)= name
+          &nbsp; - &nbsp;
+          - if (event.tags)
+            - each tag in event.tags.split(',')
+              &nbsp;
+              a.tag(href="/tags/"+tag)
+                i.icon-tags
+                | #{tag}
+    - if (pages > 1)
+      .pagination
+        ul
+          != createPagination(pages, page)
+  - else
+    p.muted No events.&nbsp;
+      a(href="/events/new") create one

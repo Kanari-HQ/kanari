@@ -1,0 +1,22 @@
+header#header
+  .navbar.navbar-fixed-top(role='navigation')
+    .navbar-inner
+      .container
+        a.brand(href='/') Kanari
+        .nav-collapse.collapse
+          ul.nav
+            //li(class=isActive('/events/new') ? 'active' : '') @kamfix
+            li(class='')
+              a(href="/events/new", title="new event") New
+          ul.nav.pull-right
+            li
+              iframe(style="border: 0; margin: 10px 0 0 0; padding: 0;", src="https://www.gittip.com/madhums/widget.html", width="48pt", height="22pt")
+
+            if (req.isAuthenticated())
+              li
+                a(href="/users/"+req.user.id, title="Profile") Profile
+              li
+                a(href="/logout", title="logout") Logout
+            else
+              li
+                a(href="/login", title="Login") Login
