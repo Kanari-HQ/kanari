@@ -135,3 +135,25 @@ exports.destroy = function(req, res){
         res.redirect('/events')
     })
 }
+
+exports.search = function(req, res) {
+
+    var eventCode = req.body.event_code
+
+    console.log(req.body)
+
+    Event.loadByEventCode(eventCode, function (err, event) {
+        console.log(event)
+
+        if (err || !event) {
+            var msg = err || 'Could not find event'
+            req.flash('success', msg)
+            return res.redirect('/')
+        }
+
+        res.render('events/show', {
+            title: event.title,
+            event: event
+        })
+    })
+}

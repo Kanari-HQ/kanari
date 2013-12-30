@@ -5,18 +5,14 @@ header#header
         a.brand(href='/') Kanari
         .nav-collapse.collapse
           ul.nav
-            //li(class=isActive('/events/new') ? 'active' : '') @kamfix
-            li(class='')
+            li(class=isActive('/events/new') ? 'active' : '')
               a(href="/events/new", title="new event") New
           ul.nav.pull-right
-            li
-              iframe(style="border: 0; margin: 10px 0 0 0; padding: 0;", src="https://www.gittip.com/madhums/widget.html", width="48pt", height="22pt")
-
             if (req.isAuthenticated())
-              li
+              li(class=isActive("/users/"+req.user.id) ? 'active' : '')
                 a(href="/users/"+req.user.id, title="Profile") Profile
               li
                 a(href="/logout", title="logout") Logout
             else
-              li
+              li(class=isActive("/login") ? 'active' : '')
                 a(href="/login", title="Login") Login

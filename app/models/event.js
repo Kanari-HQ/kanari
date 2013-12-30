@@ -32,7 +32,7 @@ var setTags = function (tags) {
 
 var EventSchema = new Schema({
     title: {type : String, default : '', trim : true},
-    body: {type : String, default : '', trim : true},
+    event_code: {type : String, default: '', trim : true},
     user: {type : Schema.ObjectId, ref : 'User'},
     comments: [{
         body: { type : String, default : '' },
@@ -55,9 +55,9 @@ EventSchema.path('title').validate(function (title) {
     return title.length > 0
 }, 'Event title cannot be blank')
 
-EventSchema.path('body').validate(function (body) {
-    return body.length > 0
-}, 'Event body cannot be blank')
+EventSchema.path('event_code').validate(function (event_code) {
+    return event_code.length > 0
+}, 'Event code cannot be blank')
 
 /**
  * Pre-remove hook
@@ -147,7 +147,16 @@ EventSchema.statics = {
      */
 
     load: function (id, cb) {
+        console.log('Event.load()')
         this.findOne({ _id : id })
+            .populate('user', 'name email username')
+            .populate('comments.user')
+            .exec(cb)
+    },
+
+    loadByEventCode: function(event_code, cb) {
+        console.log('Event.loadByEventCode()')
+        this.findOne({event_code: event_code })
             .populate('user', 'name email username')
             .populate('comments.user')
             .exec(cb)

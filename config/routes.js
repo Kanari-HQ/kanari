@@ -11,6 +11,7 @@ var async = require('async')
 var users = require('../app/controllers/users')
     , events = require('../app/controllers/events')
     , auth = require('./middlewares/authorization')
+    , home = require('../app/controllers/home')
 
 /**
  * Route middlewares
@@ -89,6 +90,7 @@ module.exports = function (app, passport) {
     // event routes
     app.get('/events', events.index)
     app.get('/events/new', auth.requiresLogin, events.new)
+    app.post('/events/search', events.search)
     app.post('/events', auth.requiresLogin, events.create)
     app.get('/events/:id', events.show)
     app.get('/events/:id/edit', eventAuth, events.edit)
@@ -98,7 +100,7 @@ module.exports = function (app, passport) {
     app.param('id', events.load)
 
     // home route
-    app.get('/', events.index)
+    app.get('/', home.index)
 
     // comment routes
 //    var comments = require('../app/controllers/comments')

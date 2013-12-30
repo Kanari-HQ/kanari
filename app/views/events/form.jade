@@ -29,9 +29,9 @@ block content
             input#file(type='file', name="image[]")
 
         .control-group
-          label.control-label(for='desc') Body
+          label.control-label(for='event_code') Event Code
           .controls
-            textarea#desc.input-xlarge(type='text', rows="5", name="body", placeholder='Enter the event description')=event.body
+            textarea#event_code.input-xlarge(type='text', rows="5", name="event_code", placeholder='Enter the event code')=event.event_code
 
         .control-group
           label.control-label(for='tags') Tags

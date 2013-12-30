@@ -4,7 +4,7 @@ block main
 block content
   .row
     .span9
-      p=event.body
+      p=event.event_code
       .meta.muted
         - if (event.user)
           - var name = event.user.name ? event.user.name : event.user.username

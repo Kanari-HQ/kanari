@@ -1,0 +1,39 @@
+extends ../layouts/default
+
+block main
+  h1= title
+
+block content
+  .container
+    .row
+      .jumbotron
+        img.img-responsive(alt="Responsive image", src="/images/kanari-logo-final.gif")
+        h4.tagline Live event testing and analytics for theater, music, presentations, anything you experience start to finish
+    .panel
+      .panel-body
+        .row
+          .col-md-4
+            h2 Enter Event Code
+            form.form-horizontal(method="post", action="/events/search", enctype="multipart/form-data")
+
+              input(type="hidden", name="_csrf", value="#{csrf_token}")
+
+              .control-group
+                label.control-label(for='event_code') Event Code
+                .controls
+                  input#title.input-xlarge(type='text', name="event_code", value='', placeholder='Enter the event code')
+
+              .form-actions
+                button.btn.btn-primary(type='submit') Find event
+
+            h2 Create Event
+            a.btn.btn-primary.btn-lg.btn-block.kanari-btn(href="/events/new") Create Event
+          .col-md-4
+            h2 Previous Events
+            ul.list-group
+            - if (events && events.length)
+              - each event in events
+                li.list-group-item
+                  a(href='/events/'+event._id, title=event.title) #{event.title}, code: #{event.event_code}
+              //@kamtodo:
+              //   = link_to "#{event.title} #{event.soundcloud_uri.present? ? '(Complete)': ''}", event

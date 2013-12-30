@@ -11,29 +11,13 @@ block content
         .row
           .col-md-4
             h2 Enter Event Code
-              //@kamlearn: How do we display a form then add that object into a database?
-              //@kamlearn: How do we display objects from the database?
-              //@kamtodo: Enter dynamic form here
-              //  = form_tag(vote_votes_path, method: "get") do
-              //    .field
-              //      -#= label_tag :event_code
-              //      = text_field_tag :event_code
-              //      span
-              //        = submit_tag 'Go', class: "btn btn-info btn-lg"
           .col-md-4
             h2 Create Event
-            a.btn.btn-primary.btn-lg.btn-block.kanari-btn(href="@kamtodo")
+            a.btn.btn-primary.btn-lg.btn-block.kanari-btn(href="/events")
               Create Event
               span.glyphicon.glyphicon-chevron-right
           .col-md-4
             h2 Previous Events
-              //@kamtodo:
-              //  - if @events.present?
-              //    .panel.panel-default
-              //      ul.list-group
-              //      - @events.each do |event|
-              //        li.list-group-item
-              //          = link_to "#{event.title} #{event.soundcloud_uri.present? ? '(Complete)': ''}", event
     .row
       .col-md-12
         #mc_embed_signup
