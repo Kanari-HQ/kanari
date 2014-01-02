@@ -1,0 +1,48 @@
+extends ../layouts/default
+
+
+block main
+  h1= title
+  hr
+
+block content
+  - var action = '/events'
+  - action += event.isNew? '' : '/' + event.id
+
+  .row
+    .span7
+      form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
+
+        input(type="hidden", name="_csrf", value="#{csrf_token}")
+
+        - if (!event.isNew)
+          input(type="hidden", name="_method", value="PUT")
+
+        .control-group
+          label.control-label(for='title') Title
+          .controls
+            input#title.input-xlarge(type='text', name="title", value=event.title, placeholder='Enter the title')
+
+        //.control-group
+          label.control-label(for='file') Image
+          .controls
+            input#file(type='file', name="image[]")
+
+        .control-group
+          label.control-label(for='event_code') Event Code
+          .controls
+            textarea#event_code.input-xlarge(type='text', rows="5", name="event_code", placeholder='Enter the event code')=event.event_code
+
+        .control-group
+          label.control-label(for='tags') Tags
+          .controls
+            input#tags(type='text', name="tags", value=event.tags, placeholder='Enter the tags')
+
+        .form-actions
+          button.btn.btn-primary(type='submit') Save changes
+          &nbsp;
+          a.btn(href='/events', title="cancel") Cancel
+
+    //.span5
+      - if (!event.isNew && event.image && event.image.files && event.image.files.length)
+        img(src=event.image.cdnUri + "/mini_" + event.image.files[0])

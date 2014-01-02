@@ -1,21 +1,48 @@
 {
-  "name": "kanari",
-  "description": "User testing live events",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "db-migrate": "*",
-    "express": "3.4.4",
-    "pg": "2.x",
-    "jade": "*",
-    "sass": "*",
-    "underscore": "*"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-uglify": "~0.2.7"
-  }
+    "name": "kanari",
+    "description": "User testing live events",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "latest",
+        "jade": "latest",
+        "mongoose": "latest",
+        "connect-mongo": "latest",
+        "connect-flash": "latest",
+        "passport": "latest",
+        "passport-local": "latest",
+        "passport-facebook": "latest",
+        "passport-twitter": "latest",
+        "passport-github": "latest",
+        "passport-google-oauth": "latest",
+        "passport-linkedin": "latest",
+        "imager": "latest",
+        "notifier": "latest",
+        "underscore": "latest",
+        "async": "latest",
+        "view-helpers": "latest",
+        "forever": "latest"
+    },
+    "devDependencies": {
+        "supertest": "latest",
+        "should": "latest",
+        "mocha": "latest",
+        "nodemon": "latest",
+        "grunt": "latest",
+        "grunt-contrib-uglify": "latest"
+    },
+    "keywords": [
+        "express",
+        "framework",
+        "sinatra",
+        "web",
+        "rest",
+        "restful",
+        "router",
+        "app",
+        "api"
+    ]
 }

@@ -1,83 +1,48 @@
-var express     = require('express')
-    , http      = require('http')
-    , path      = require('path')
-    , pg        = require('pg').native;
+/*
+ * kanari
+ */
 
-var   routes    = require('./routes/routes')
-//    , user      = require('./routes/user')
-    , config    = require('./config/config')()
-    , Admin     = require('./controllers/Admin');
+/**
+ * Module dependencies.
+ */
+var express = require('express')
+    , fs = require('fs')
+    , passport = require('passport')
 
-var dbUrl; // Set below
-var app = express();
+/**
+ * Main application entry file.
+ * Please note that the order of loading is important.
+ */
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'templates'));
-app.set('view engine', 'jade');
+// Load configurations
+// if test env, load example file
+var env = process.env.NODE_ENV || 'development'
+    , config = require('./config/config')[env]
+    , mongoose = require('mongoose')
 
-// Express uses Connect plugins for middleware, and middleware
-// executes in order of first declaration to last
-app.use(express.favicon());
-app.use(express.logger());
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+// Bootstrap db connection
+mongoose.connect(config.db)
 
-app.configure('development', function(){
-    console.log('Using config db_url');
-    dbUrl = config.dbUrl;
-    app.locals.pretty = true;
-    app.use(express.errorHandler()); // @nate: why is this only in development???
-});
-
-if ('development' != app.get('env')) {
-    dbUrl = process.env.DATABASE_URL;
-    if(dbUrl) {
-        console.log('Using DATABASE_URL as expected');
-    } else {
-        // @kamlearn: how do you properly shut down the app on error???
-        console.log('Sorry, there was no DATABASE_URL set on env:' + app.get('env'));
-    }
-}
-
-app.get('/', routes.index);
-//app.get('/about', routes.about);
-//app.get('/users', user.list);
-
-// routes
-var Admin = require('./controllers/Admin'),
-    Events = require('./controllers/Events'),
-    Users = require('./controllers/Users');
-
-pg.connect(dbUrl, function(err, db){
-    if(err){
-        console.log('Sorry, there is no postgres server running at the specified address, err:' + err);
-    } else {
-        console.log('Connected to database');
-        var attachDB = function(req, res, next){
-            req.db = db;
-            next();
-        };
-
-        app.all('/admin*', attachDB, function(req, res, next){
-            Admin.run(req, res, next);
-        });
-
-        app.all('/events*', attachDB, function(req, res, next){
-            Events.run(req, res, next);
-        });
-
-        app.all('/users*', attachDB, function(req, res, next){
-            Users.run(req, res, next);
-        });
-    
-        http.createServer(app).listen(config.port, function(){
-          console.log('Connected to database')
-          console.log('Express server listening on port ' + config.port);
-        });
-    }
+// Bootstrap models
+var models_path = __dirname + '/app/models'
+fs.readdirSync(models_path).forEach(function (file) {
+    if (~file.indexOf('.js')) require(models_path + '/' + file)
 })
 
+// bootstrap passport config
+require('./config/passport')(passport, config)
+
+var app = express()
+// express settings
+require('./config/express')(app, config, passport)
+
+// Bootstrap routes
+require('./config/routes')(app, passport)
+
+// Start the app by listening on <port>
+var port = process.env.PORT || 3000
+app.listen(port)
+console.log('App started on port '+port)
+
+// expose app
+exports = module.exports = app

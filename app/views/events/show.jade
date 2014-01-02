@@ -1,0 +1,37 @@
+extends ../layouts/default
+block main
+  h1= event.title
+block content
+  .row
+    .span9
+      p=event.event_code
+      .meta.muted
+        - if (event.user)
+          - var name = event.user.name ? event.user.name : event.user.username
+          p Author -&nbsp;
+            a(href="/users/"+event.user._id)= name
+        p.muted= formatDate(event.createdAt, "%b %d, %Y at %I:%M %p")
+        - if (event.tags)
+          .tags
+            - each tag in event.tags.split(',')
+              a.tag(href="/tags/"+tag)
+                i.icon-tags
+                | #{tag}
+              &nbsp;&nbsp;
+    //.span3
+      - if (!event.isNew && event.image && event.image.files && event.image.files.length)
+        img(src=event.image.cdnUri + '/mini_' + event.image.files[0])
+  p
+    br
+    form.center.form-inline.confirm(action="/events/"+event.id, method="post")
+      input(type='hidden', name='_csrf', value="#{csrf_token}")
+      a.btn(href='/events/'+event._id+'/edit', title="edit") Edit
+      &nbsp;&nbsp;
+      input(type="hidden", name="_method", value="DELETE")
+      button.btn.btn-danger(type="submit") delete
+  //p
+    br
+    h3 Comments
+    - each comment in event.comments
+      include ../comments/comment
+    include ../comments/form
