@@ -1,48 +1,50 @@
 {
-    "name": "kanari",
-    "description": "User testing live events",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "start": "node app.js"
-    },
-    "dependencies": {
-        "express": "latest",
-        "jade": "latest",
-        "mongoose": "latest",
-        "connect-mongo": "latest",
-        "connect-flash": "latest",
-        "passport": "latest",
-        "passport-local": "latest",
-        "passport-facebook": "latest",
-        "passport-twitter": "latest",
-        "passport-github": "latest",
-        "passport-google-oauth": "latest",
-        "passport-linkedin": "latest",
-        "imager": "latest",
-        "notifier": "latest",
-        "underscore": "latest",
-        "async": "latest",
-        "view-helpers": "latest",
-        "forever": "latest"
-    },
-    "devDependencies": {
-        "supertest": "latest",
-        "should": "latest",
-        "mocha": "latest",
-        "nodemon": "latest",
-        "grunt": "latest",
-        "grunt-contrib-uglify": "latest"
-    },
-    "keywords": [
-        "express",
-        "framework",
-        "sinatra",
-        "web",
-        "rest",
-        "restful",
-        "router",
-        "app",
-        "api"
-    ]
+  "name": "kanari",
+  "description": "User testing live events",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "jade": "latest",
+    "mongoose": "latest",
+    "connect-mongo": "latest",
+    "connect-flash": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "passport-github": "latest",
+    "passport-google-oauth": "latest",
+    "passport-linkedin": "latest",
+    "imager": "latest",
+    "notifier": "latest",
+    "underscore": "latest",
+    "async": "latest",
+    "view-helpers": "latest"
+  },
+  "devDependencies": {
+    "supervisor": "~0.5.6",
+    "chai": "latest",
+    "sinon": "latest",
+    "supertest": "latest",
+    "should": "latest",
+    "mocha": "latest",
+    "nodemon": "latest",
+    "grunt": "latest",
+    "grunt-contrib-uglify": "latest"
+  },
+  "keywords": [
+    "express",
+    "framework",
+    "sinatra",
+    "web",
+    "rest",
+    "restful",
+    "router",
+    "app",
+    "api"
+  ]
 }

@@ -1,0 +1,2 @@
+#!/bin/bash
+./node_modules/.bin/supervisor -i node_modules --no-restart-on error -- ./app.js
