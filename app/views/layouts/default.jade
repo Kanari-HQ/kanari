@@ -17,12 +17,11 @@ html(lang='en')
   body
     .wrapper
       include ../includes/header
-      .container
-        .main-content
-          .main-head
-            block main
-          include ../includes/messages
-          block content
+      .main-content
+        .main-head
+          block main
+        include ../includes/messages
+        block content
       .push
     include ../includes/footer
     include ../includes/foot

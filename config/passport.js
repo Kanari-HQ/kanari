@@ -5,6 +5,7 @@ var mongoose = require('mongoose')
     , GitHubStrategy = require('passport-github').Strategy
     , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
     , LinkedinStrategy = require('passport-linkedin').Strategy
+    , SoundCloudStrategy = require('passport-soundcloud').Strategy
     , User = mongoose.model('User')
 
 
@@ -40,6 +41,33 @@ module.exports = function (passport, config) {
             })
         }
     ))
+
+
+    // Use the SoundCloudStrategy within Passport.
+    //   Strategies in Passport require a `verify` function, which accept
+    //   credentials (in this case, an accessToken, refreshToken, and SoundCloud
+    //   profile), and invoke a callback with a user object.
+
+    var SOUNDCLOUD_CLIENT_ID = "eb18042421926b47147cf70702d6c5f7";
+    var SOUNDCLOUD_CLIENT_SECRET = "c49e63c42858a92d5e5a07c85fed49ca";
+    passport.use(new SoundCloudStrategy({
+        clientID: SOUNDCLOUD_CLIENT_ID,
+        clientSecret: SOUNDCLOUD_CLIENT_SECRET,
+        callbackURL: "http://127.0.0.1:3000/auth/soundcloud/callback"
+      },
+      function(accessToken, refreshToken, profile, done) {
+        // asynchronous verification, for effect...
+        process.nextTick(function () {
+          
+          // To keep the example simple, the user's SoundCloud profile is returned
+          // to represent the logged-in user.  In a typical application, you would
+          // want to associate the SoundCloud account with a user record in your
+          // database, and return that user instead.
+          return done(null, profile);
+        });
+      }
+    ));
+
 
     // use twitter strategy
     passport.use(new TwitterStrategy({
@@ -151,6 +179,8 @@ module.exports = function (passport, config) {
             })
         }
     ));
+
+    
 
     // use linkedin strategy
     passport.use(new LinkedinStrategy({

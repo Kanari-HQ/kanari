@@ -36,6 +36,15 @@ module.exports = function (app, passport) {
             failureFlash: 'Invalid email or password.'
         }), users.session)
     app.get('/users/:userId', users.show)
+
+    app.get('/auth/soundcloud',
+        passport.authenticate('soundcloud', {
+            failureRedirect: '/login'
+        }), users.signin)
+    app.get('/auth/soundcloud/callback',
+        passport.authenticate('soundcloud', {
+            failureRedirect: '/login'
+        }), users.authCallback)
     app.get('/auth/facebook',
         passport.authenticate('facebook', {
             scope: [ 'email', 'user_about_me'],

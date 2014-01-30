@@ -19,6 +19,7 @@
     "passport-github": "latest",
     "passport-google-oauth": "latest",
     "passport-linkedin": "latest",
+    "passport-soundcloud": "latest",
     "imager": "latest",
     "notifier": "latest",
     "underscore": "latest",

@@ -1,12 +1,9 @@
 hr
 .row
-  .col-md-12
+  .col-md-6
     #mc_embed_signup
       form#mc-embedded-subscribe-form.validate(action="http://radiolivechicago.us2.list-manage.com/subscribe/post?u=b250a55dae7e8097911003bb5&id=bf9a2db01b", method="post", name="mc-embedded-subscribe-form", novalidate="", target="_blank")
         label(for="mce-EMAIL") Receive Kanari updates:
-        input#mce-EMAIL.email(name="EMAIL", placeholder="email address", required="", type="email", value="")
-        .clear
-          .actions
-            input#mc-embedded-subscribe.button(name="subscribe", type="submit", value="Subscribe", class="btn btn-info btn-lg")
-
-
+        input.form-control#mce-EMAIL.email(name="EMAIL", placeholder="email address", required="", type="email", value="")
+        .actions
+          input#mc-embedded-subscribe.button(name="subscribe", type="submit", value="Subscribe", class="btn btn-info btn-lg")
